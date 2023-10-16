@@ -10,3 +10,7 @@ setupTasks:
     inputs:
       command: 'choco install postman -y'
       runAsUser: true
+  - task: powershell
+    inputs:
+      command: 'choco install notepad++ -y'
+      runAsUser: true
