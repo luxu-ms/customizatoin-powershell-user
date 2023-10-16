@@ -1,0 +1,12 @@
+name: run-powershella-as-user
+image: MicrosoftVisualStudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2
+hostInformation: general_i_8c32gb256ssd_v2
+supportsHibernation: true
+setupTasks:
+  - task: powershell
+    inputs:
+      command: "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+  - task: powershell
+    inputs:
+      command: 'choco install postman -y'
+      runAsUser: true
