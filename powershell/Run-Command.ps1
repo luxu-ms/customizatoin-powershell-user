@@ -27,7 +27,7 @@ if ($WorkingDirectory -and $WorkingDirectory -ne "") {
 # even if the system has pwsh.exe.
 if($RunAsUser -ne "true") {
     Write-Output "Running command as sysadmin: $Command"
-    powershell.exe -Command '$Command'
+    powershell.exe -Command $($Command)
     $CommandExitCode = $LASTEXITCODE
     Write-Output "Command exited with code $CommandExitCode"
 
@@ -137,8 +137,3 @@ Remove-Item -Path "$($CustomizationScriptsDir)\$($LockFile)" -Force
         SetupScheduledTasks $RunAsUserScriptPath $lockFileFullPath $cleanupfullPath
     }
 }
-
-
-
-
-
