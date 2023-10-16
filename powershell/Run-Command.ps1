@@ -26,7 +26,7 @@ if ($WorkingDirectory -and $WorkingDirectory -ne "") {
 # Note that this will run powershell.exe
 # even if the system has pwsh.exe.
 if($RunAsUser -ne "true") {
-    Write-Output "Running command $Command as sysadmin"
+    Write-Output "Running command as sysadmin: $Command"
     powershell.exe -Command '$Command'
     $CommandExitCode = $LASTEXITCODE
     Write-Output "Command exited with code $CommandExitCode"
@@ -37,11 +37,11 @@ if($RunAsUser -ne "true") {
     # command succeeded or failed.
     exit $CommandExitCode
 } else {
-    Write-Output "Running command $Command as user"
+    Write-Output "Running command as user: $Command"
 
     # Run the command as user, it will write the command to a powershell script and start a shedule task to run this script when the user login devbox
     $REMOVE_LOCKFILE_LAST_LINE = @'
-    Remove-Item -Path "$($CustomizationScriptsDir)\$($LockFile)" -Force
+Remove-Item -Path "$($CustomizationScriptsDir)\$($LockFile)" -Force
 '@
 
     # This function will remove the last line of the file if it is the same as $REMOVE_LOCKFILE_LAST_LINE
@@ -125,9 +125,9 @@ if($RunAsUser -ne "true") {
     $lockFileFullPath = "$($CustomizationScriptsDir)\$($LockFile)"
     $cleanupfullPath = "$($CustomizationScriptsDir)\$($CleanupScript)"
 
-    if(![string]::IsNullOrEmpty($Powershellcommands)){
+    if(![string]::IsNullOrEmpty($Command)){
         removeLastLinewithRemoveItem($RunAsUserScriptPath)
-        Add-Content -Path $RunAsUserScriptPath -Value $Powershellcommands
+        Add-Content -Path $RunAsUserScriptPath -Value $Command
         Add-Content -Path $RunAsUserScriptPath -Value $REMOVE_LOCKFILE_LAST_LINE
     }
 
