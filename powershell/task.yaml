@@ -16,8 +16,8 @@ inputs:
     required: false
     description: The working directory to execute the command in.
   runAsUser:
-    type: string
-    defaultValue: ""
+    type: boolean
+    defaultValue: false
     required: false
     description: execute the command when the user login the devbox at the first time.
 documentation:
