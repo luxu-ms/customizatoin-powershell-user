@@ -13,5 +13,5 @@ setupTasks:
       runAsUser: true
   - task: powershell
     inputs:
-      command: 'choco install notepad++ -y'
+      command: 'choco install notepadplusplus -y'
       runAsUser: true
